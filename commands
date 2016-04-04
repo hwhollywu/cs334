@@ -1,0 +1,296 @@
+
+2.8 Monday
+
+hawu@sp309-81:~$ ps
+  PID TTY          TIME CMD
+10613 pts/0    00:00:00 bash
+11032 pts/0    00:00:00 ps
+hawu@sp309-81:~$ ps -aux
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0  94308  7128 ?        Ss   07:48   0:01 /sbin/init
+root         2  0.0  0.0      0     0 ?        S    07:48   0:00 [kthreadd]
+.......
+
+hawu@sp309-81:~$ pstree | less
+hawu@sp309-81:~$ 
+hawu@sp309-81:~$ ps -aux | grep init
+root         1  0.0  0.0  94308  7128 ?        Ss   07:48   0:01 /sbin/init
+lightdm   8244  0.0  0.0  27840  3448 ?        S    10:16   0:00 init --user --startup-event indicator-services-start
+hawu     11053  0.0  0.0  11992  2164 pts/0    S+   10:51   0:00 grep --color=auto init
+
+
+
+
+
+---------------------------------------------------------------
+
+hawu@sp309-90:~$ cd Downloads/
+hawu@sp309-90:~/Downloads$ dur
+No command 'dur' found, did you mean:
+ Command 'dir' from package 'coreutils' (main)
+ Command 'ur' from package 'libur-perl' (universe)
+ Command 'drr' from package 'plastimatch' (universe)
+ Command 'sur' from package 'subtle' (universe)
+ Command 'du' from package 'coreutils' (main)
+ Command 'dar' from package 'dar' (universe)
+dur: command not found
+hawu@sp309-90:~/Downloads$ dir
+a2template.pdf
+a2template.tex
+a3template.pdf
+assign2.rkt
+assign2.rkt~
+assign2-sol.rkt
+assign3\ (1).rkt
+assign3.rkt
+assign8.zip
+bear.JPG
+big-bang.rkt
+binary_search_trees_bst_again.pptx
+cachelabhandout\ (1).tar
+cachelabhandout.tar
+chap6practice.pdf
+chap6practice.tex
+cmpu102\ fall
+cmpu102\ fall.tar.gz
+ComparatorTeam5-master.zip
+en-guidelines-201.docx
+ExtremeProgramming\ (1).pptx
+ExtremeProgramming.pptx
+gLinkList
+gLinkList.tar.gz
+great-desktop-wallpapers-9.jpg
+Hao\ Wu\ -\ assign1.pdf
+Hao\ Wu\ -assign2.pdf
+Hao\ Wu\ -assign2.tex
+hello_world_by_marielart.jpg
+HorstmannChapter1\ (1).pptx
+HorstmannChapter1.pptx
+HorstmannChapter2.pptx
+HorstmannChapter3.pptx
+HorstmannChapter4.pptx
+HorstmannChapter5\ (1).pptx
+HorstmannChapter5.pptx
+HorstmannChapter6.pptx
+HorstmannChapter7\ (1).pptx
+HorstmannChapter7\ (2).pptx
+HorstmannChapter7.pptx
+image.9MORCY.png
+lab9review.pptx
+Lecture\ 2\ -\ ethics.pptx
+Midterm\ review\ questions-answers.docx
+Midterm\ review\ questions-only.docx
+objects-first-ch1.pdf
+Operating\ System\ Concepts,\ 9th\ Edition.pdf
+pintos.tar.gz
+practice-set-3.pdf
+tester
+tester.jar
+thread_lab.tar
+tpfoverview.pdf
+VHPPublicity-CountdowntoD.C.Sale.pdf
+hawu@sp309-90:~/Downloads$ 
+hawu@sp309-90:~/Downloads$ 
+hawu@sp309-90:~/Downloads$ 
+hawu@sp309-90:~/Downloads$ cd ..
+hawu@sp309-90:~$ cd /opt/cs334
+hawu@sp309-90:/opt/cs334$ ls -la
+total 16
+drwxr-xr-x  4 root root 4096 Mar 27 19:28 .
+drwxr-xr-x 11 root root 4096 Mar 28 08:56 ..
+drwxr-xr-x  2 root root 4096 Mar 27 21:19 bin
+drwxr-xr-x  6 root root 4096 Mar 27 20:58 share
+hawu@sp309-90:/opt/cs334$ cd bin
+hawu@sp309-90:/opt/cs334/bin$ ls
+backtrace  bochs-dbg  bximage  pintos-gdb     Pintos.pm           squish-pty
+bochs      bxcommit   pintos   pintos-mkdisk  pintos-set-cmdline  squish-unix
+hawu@sp309-90:/opt/cs334/bin$ 
+hawu@sp309-90:/opt/cs334/bin$ 
+hawu@sp309-90:/opt/cs334/bin$ ls -al
+total 26068
+drwxr-xr-x 2 root root     4096 Mar 27 21:19 .
+drwxr-xr-x 4 root root     4096 Mar 27 19:28 ..
+-rwxr-xr-x 1 root root     2951 Mar 27 21:04 backtrace
+-rwxr-xr-x 1 root root 12828579 Mar 27 19:28 bochs
+-rwxr-xr-x 1 root root 13625819 Mar 27 19:28 bochs-dbg
+-rwxr-xr-x 1 root root    59923 Mar 27 19:28 bxcommit
+-rwxr-xr-x 1 root root    55979 Mar 27 19:28 bximage
+-rwxr-xr-x 1 root root    30162 Mar 27 21:04 pintos
+-rwxr-xr-x 1 root root      413 Mar 27 21:16 pintos-gdb
+-rwxr-xr-x 1 root root     4563 Mar 27 21:04 pintos-mkdisk
+-rw-r--r-- 1 root root    14562 Mar 27 21:04 Pintos.pm
+-rwxr-xr-x 1 root root     1279 Mar 27 21:04 pintos-set-cmdline
+-rwxr-xr-x 1 root root    18799 Mar 27 21:15 squish-pty
+-rwxr-xr-x 1 root root    18715 Mar 27 21:15 squish-unix
+hawu@sp309-90:/opt/cs334/bin$ 
+hawu@sp309-90:/opt/cs334/bin$ 
+hawu@sp309-90:/opt/cs334/bin$ 
+hawu@sp309-90:/opt/cs334/bin$ cd 
+hawu@sp309-90:~$ ls -la
+total 896
+drwx--x--x 39 hawu asprey2  4096 Mar 28 10:45 .
+drwxr-xr-x  3 root root        0 Mar 28 10:45 ..
+-rw-r--r--  1 hawu asprey2 35382 Mar  2 18:04 .bash_history
+-rw-r--r--  1 hawu asprey2   108 Sep 23  2014 .bash_login
+-rw-r--r--  1 hawu asprey2   220 Sep 23  2014 .bash_logout
+-rw-r--r--  1 hawu asprey2  4495 Sep 23  2014 .bashrc
+drwxr-xr-x  2 hawu asprey2  4096 Feb 20  2015 .bluej
+drwx------ 20 hawu asprey2  4096 Mar 28 10:46 .cache
+drwx------  3 hawu asprey2  4096 Sep 29 13:24 .compiz
+drwx------ 31 hawu asprey2  4096 Mar  8 16:23 .config
+drwx------ 10 hawu asprey2  4096 Nov 30 12:11 cs101
+drwx------ 14 hawu asprey2  4096 Apr 28  2015 cs102
+drwxr-xr-x  8 hawu asprey2  4096 May  3  2015 cs145-<HaoWu>
+drwxr-xr-x 15 hawu asprey2  4096 Dec 18 13:50 cs203
+drwxr-xr-x 11 hawu asprey2  4096 Dec  3 18:19 cs224
+drwxr-xr-x  2 hawu asprey2  4096 Mar  3 15:12 cs241
+drwxr-xr-x  3 hawu asprey2  4096 Mar  2 17:59 cs334
+drwx------  3 hawu asprey2  4096 Sep 25  2014 .dbus
+drwx------  4 hawu asprey2  4096 Dec  8 13:56 .ddd
+drwx------  5 hawu asprey2  4096 Nov 30 12:12 Desktop
+-rw-r--r--  1 hawu asprey2    58 Mar 10 10:30 .dmrc
+drwx------  5 hawu asprey2  4096 Mar 28 10:48 Downloads
+-rw-r-----  1 hawu asprey2   515 Oct 22 14:23 .emacs
+drwx------  3 hawu asprey2  4096 Oct  6 14:58 .emacs.d
+-rw-------  1 hawu asprey2    16 Sep 25  2014 .esd_auth
+drwxr-xr-x  2 hawu asprey2 12288 May 11  2015 .fontconfig
+-rw-r--r--  1 hawu asprey2    16 Sep 23  2014 .forward
+drwx------  3 hawu asprey2  4096 Mar 28 10:46 .gconf
+-rw-r-----  1 hawu asprey2    58 Sep 28 15:29 .gdbinit
+-rw-r-----  1 hawu asprey2    57 Sep 28 15:29 .gdbinit~
+drwx------  4 hawu asprey2  4096 Jan 30  2015 .gegl-0.0
+drwxr-xr-x 22 hawu asprey2  4096 Jan 30  2015 .gimp-2.6
+drwxr-x---  7 hawu asprey2  4096 Nov  9 16:50 .git
+-rw-r-----  1 hawu asprey2   105 Aug 31  2015 .gitconfig
+-rw-r--r--  1 hawu asprey2   253 Oct 19 17:43 .gitignore
+drwx------  3 hawu asprey2  4096 Sep 30  2014 .gnome
+drwxr-xr-x  3 hawu asprey2  4096 Oct 19 18:17 .gstreamer-0.10
+-rw-------  1 hawu asprey2     0 Sep 30  2014 .gtk-bookmarks
+drwx------  2 hawu asprey2  4096 Sep 25  2014 .gvfs
+-rw-r--r--  1 hawu asprey2 79966 Oct  5 15:09 hs_err_pid12262.log
+-rw-r--r--  1 hawu asprey2 80438 Sep 28 17:58 hs_err_pid16727.log
+-rw-r--r--  1 hawu asprey2 73662 Nov  9 16:54 hs_err_pid18348.log
+-rw-r--r--  1 hawu asprey2 68565 Nov 30 18:04 hs_err_pid23783.log
+-rw-r--r--  1 hawu asprey2 75299 Oct 20 21:46 hs_err_pid25610.log
+-rw-r--r--  1 hawu asprey2 70467 Nov 23 12:23 hs_err_pid4672.log
+-rw-r--r--  1 hawu asprey2 72080 Oct 19 13:14 hs_err_pid7446.log
+-rw-r--r--  1 hawu asprey2 69403 Oct  5 13:20 hs_err_pid8988.log
+-rw-------  1 hawu asprey2  4230 Mar 28 10:45 .ICEauthority
+drwxr-xr-x  3 hawu asprey2  4096 Feb 13  2015 .java
+-rw-------  1 hawu asprey2    42 Nov 16 15:37 .lesshst
+drwxr-xr-x  3 hawu asprey2  4096 Sep  5  2012 .local
+-rw-r--r--  1 hawu asprey2  8359 Mar 30  2015 #mredauto#1#
+drwxr-xr-x  4 hawu asprey2  4096 Aug 31  2015 .netbeans
+drwx------  3 hawu asprey2  4096 Sep 30  2014 .nv
+drwx------  3 hawu asprey2  4096 Sep 30  2014 .pki
+drwxr-x---  2 hawu asprey2  4096 Feb 23 18:06 .plt-scheme
+-rw-r--r--  1 hawu asprey2   682 Sep 23  2014 .profile
+drwxr-xr-x  2 hawu asprey2  4096 Sep  4  2012 public_html
+drwx------  2 hawu asprey2 20480 Mar 28 10:46 .pulse
+-rw-------  1 hawu asprey2   256 Sep 25  2014 .pulse-cookie
+drwxr-x---  2 hawu asprey2  4096 Feb 23 17:28 .racket
+-rw-r-----  1 hawu asprey2     0 Sep 24  2015 .selected_editor
+drwx------  2 hawu asprey2  4096 Aug 31  2015 .ssh
+drwxr-xr-x  3 hawu asprey2  4096 Sep 25  2014 .subversion
+drwx------  4 hawu asprey2  4096 Feb  8 10:32 .thumbnails
+-rw-------  1 hawu asprey2  2198 Mar 28 10:45 .Xauthority
+drwxr-xr-x  2 hawu asprey2  4096 May 19  2015 .xine
+-rw-------  1 hawu asprey2   190 Mar 28 10:45 .xsession-errors
+-rw-------  1 hawu asprey2   233 Mar 10 17:00 .xsession-errors.old
+
+
+hawu@sp309-90:~$ less .bash_login
+source ~/.bashrc
+
+hawu@sp309-90:~$ emacs .bashrc &
+
+/opt/cs334/bin:
+
+echo $PATH
+printenv | grep PATH
+pintos
+
+hawu@sp309-90:~$ cd cs334
+hawu@sp309-90:~/cs334$ dir
+commands  Hao\ Wu\ -\ thread_lab.tar.gz  thread_lab
+hawu@sp309-90:~/cs334$ 
+hawu@sp309-90:~/cs334$ 
+hawu@sp309-90:~/cs334$ tar xzvpf -/Downloads/pintos.tar.gz
+
+hawu@sp309-90:~/cs334/pintos$ cd src
+hawu@sp309-90:~/cs334/pintos/src$ ls -la
+
+hawu@sp309-90:~/cs334/pintos/src$ cd devices
+hawu@sp309-90:~/cs334/pintos/src/devices$ dir
+
+//timer need this directory,
+//basic implements such as keyboard, drivers for sth, etc
+
+hawu@sp309-90:~/cs334/pintos/src$ cd examples
+hawu@sp309-90:~/cs334/pintos/src/examples$ dir
+
+// how to run program?
+
+hawu@sp309-90:~/cs334/pintos/src$ cd filesys
+hawu@sp309-90:~/cs334/pintos/src/filesys$  dir
+
+// filing system
+
+hawu@sp309-90:~/cs334/pintos/src$ cd lib
+hawu@sp309-90:~/cs334/pintos/src/lib$ dir
+
+hawu@sp309-90:~/cs334/pintos/src/lib$ cd kernel
+
+
+hawu@sp309-90:~/cs334/pintos/src$ cd misc
+hawu@sp309-90:~/cs334/pintos/src/misc$ dir
+
+
+
+// lab1 threads 
+make
+make
+cd build
+//kernel.o = os
+//kernel.bin = kernel.o, without debugging info, so <512k (max)
+//loader.bin = load kernel, bootstrap, switch/ initialize everything 512bytes
+
+
+hawu@sp309-90:~/cs334/pintos/src/threads/build$ pintos
+Simulator selection:
+  --bochs                  (default) Use Bochs as simulator //lab1
+  --qemu                   Use QEMU as simulator  //lab2
+
+
+hawu@sp309-90:~/cs334/pintos/src/threads/build$ pintos run alarm-multiple 
+// run os
+
+
+pintos --bochs -- run alarm-multiple
+pintos --qumu -- run alarm-multiple
+
+hawu@sp309-90:~/cs334/pintos/src$ make TAGS
+etags --members `find threads userprog vm filesys devices lib -name \*.[chS] -print`
+hawu@sp309-90:~/cs334/pintos/src$ cd threads
+hawu@sp309-90:~/cs334/pintos/src/threads$ dir
+bochsout.txt  init.h	    io.h	  Make.vars  pte.h     synch.h
+bochsrc.txt   interrupt.c   kernel.lds.S  malloc.c   start.S   thread.c
+build	      interrupt.h   loader.h	  malloc.h   switch.h  thread.h
+flags.h       intr-stubs.h  loader.S	  palloc.c   switch.S  vaddr.h
+init.c	      intr-stubs.S  Makefile	  palloc.h   synch.c
+hawu@sp309-90:~/cs334/pintos/src/threads$ 
+hawu@sp309-90:~/cs334/pintos/src/threads$ 
+hawu@sp309-90:~/cs334/pintos/src/threads$ emacs thread.c
+
+// esc+. show: visit tags table, enter -> find the file/function
+//esc+*, brings back original place
+
+
+emacs -nw bochsrc.txt
+
+romimage:
+vgaromimage: screen
+boot: disk
+
+
+/threads/ rgrep THREAD_RUNNING
