@@ -29,6 +29,12 @@ static bool too_many_loops (unsigned loops);
 static void busy_wait (int64_t loops);
 static void real_time_sleep (int64_t num, int32_t denom);
 static void real_time_delay (int64_t num, int32_t denom);
+static bool compare_wake_up_times (const struct list_elem *a, 
+                      const struct list_elem *b,
+                      void *aux UNUSED);
+static struct list sleeping_threads; 
+
+
 
 /* Sets up the timer to interrupt TIMER_FREQ times per second,
    and registers the corresponding interrupt. */
@@ -37,6 +43,7 @@ timer_init (void)
 {
   pit_configure_channel (0, 2, TIMER_FREQ);
   intr_register_ext (0x20, timer_interrupt, "8254 Timer");
+  list_init(&sleeping_threads);
 }
 
 /* Calibrates loops_per_tick, used to implement brief delays. */
@@ -46,7 +53,7 @@ timer_calibrate (void)
   unsigned high_bit, test_bit;
 
   ASSERT (intr_get_level () == INTR_ON);
-  printf ("Calibrating timer...  ");
+  //printf ("Calibrating timer...  \n");
 
   /* Approximate loops_per_tick as the largest power-of-two
      still less than one timer tick. */
@@ -63,7 +70,7 @@ timer_calibrate (void)
     if (!too_many_loops (high_bit | test_bit))
       loops_per_tick |= test_bit;
 
-  printf ("%'"PRIu64" loops/s.\n", (uint64_t) loops_per_tick * TIMER_FREQ);
+  //printf ("%'"PRIu64" loops/s.\n", (uint64_t) loops_per_tick * TIMER_FREQ);
 }
 
 /* Returns the number of timer ticks since the OS booted. */
@@ -84,16 +91,50 @@ timer_elapsed (int64_t then)
   return timer_ticks () - then;
 }
 
+
 /* Sleeps for approximately TICKS timer ticks.  Interrupts must
    be turned on. */
 void
 timer_sleep (int64_t ticks) 
 {
   int64_t start = timer_ticks ();
+  struct thread *t = thread_current();
 
   ASSERT (intr_get_level () == INTR_ON);
-  while (timer_elapsed (start) < ticks) 
-    thread_yield ();
+
+  //printf("%s\n","a thread has called timer sleep");
+  while (timer_elapsed (start) < ticks) {
+    //printf("%s\n","a thread has entered the while loop");
+    int64_t time_to_awaken = start + ticks;
+    t->wake_up_time = time_to_awaken;
+    //printf("thread's wakeup time set to: %"PRId64"\n",time_to_awaken);
+    ASSERT(intr_get_level() == INTR_ON);
+    //printf("the thread's address: %p\n", t);
+    intr_disable();
+    list_insert_ordered(&sleeping_threads, &t->alarm_elem, compare_wake_up_times, NULL);
+    intr_enable();
+
+    //printf("%s\n","thread sleeps on the sema");
+    sema_down(&t->sleeping_sema);
+    //printf("%s\n","thread wakes up");
+  }
+  thread_yield ();
+
+}
+/* A comparator function for sorting threads by their
+    wakeup times */
+static bool 
+compare_wake_up_times(const struct list_elem *a, 
+                      const struct list_elem *b,
+                      void *aux UNUSED){
+
+  struct thread *threadA, *threadB;
+
+  threadA = list_entry(a, struct thread, alarm_elem);
+  threadB = list_entry(b, struct thread, alarm_elem);
+
+return (threadA->wake_up_time < threadB->wake_up_time);
+
 }
 
 /* Sleeps for approximately MS milliseconds.  Interrupts must be
@@ -165,13 +206,41 @@ timer_print_stats (void)
 {
   printf ("Timer: %"PRId64" ticks\n", timer_ticks ());
 }
-
+
 /* Timer interrupt handler. */
 static void
 timer_interrupt (struct intr_frame *args UNUSED)
 {
   ticks++;
   thread_tick ();
+
+  struct list_elem *e;
+
+  while(!list_empty(&sleeping_threads))
+  {
+   // printf("time elapsed: %"PRId64"\n", ticks);
+
+    e = list_front(&sleeping_threads);
+    //printf("size of list: %zd\n", list_size(&sleeping_threads));
+
+    struct thread *t = list_entry(e, struct thread, alarm_elem);
+    //print_everything(t);
+    if(timer_ticks () >= t->wake_up_time)
+    {
+      //printf("the thread's address: %p\n", t);
+      //printf("%s\n", "about to call sema up");
+     // printf("sleeping_threads address: %p\n", &sleeping_threads);
+     
+     // printf("%s\n", "elem about to be removed");
+      //intr_disable();
+      list_remove(e);
+      //intr_enable();
+     // printf("%s\n", "elem removed");
+      //printf("%s\n", "sema about to be up");
+      sema_up(&t->sleeping_sema);
+      //printf("%s\n", "sema up done");
+    } else break;
+  }
 }
 
 /* Returns true if LOOPS iterations waits for more than one timer
@@ -244,3 +313,4 @@ real_time_delay (int64_t num, int32_t denom)
   ASSERT (denom % 1000 == 0);
   busy_wait (loops_per_tick * num / 1000 * TIMER_FREQ / (denom / 1000)); 
 }
+

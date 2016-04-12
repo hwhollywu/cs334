@@ -331,6 +331,8 @@ thread_foreach (thread_action_func *func, void *aux)
     }
 }
 
+
+
 /* Sets the current thread's priority to NEW_PRIORITY. */
 void
 thread_set_priority (int new_priority) 
@@ -463,6 +465,8 @@ init_thread (struct thread *t, const char *name, int priority)
   t->stack = (uint8_t *) t + PGSIZE;
   t->priority = priority;
   t->magic = THREAD_MAGIC;
+  sema_init(&t->sleeping_sema, 0);
+  t->wake_up_time = 0;
 
   old_level = intr_disable ();
   list_push_back (&all_list, &t->allelem);
@@ -569,9 +573,7 @@ schedule (void)
 static tid_t
 allocate_tid (void) 
 {
-  static tid_t next_tid = 1; 
-  // static: global variable inside the function; located outside of stack;
-  // only initialize once, init =1, then ++.
+  static tid_t next_tid = 1;
   tid_t tid;
 
   lock_acquire (&tid_lock);
